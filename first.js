@@ -75,9 +75,10 @@ const server = http.createServer((req, res) => {
         }
     });*/
 
+ 
+//taking input from the user and and storing something in a file on recieving request
 
-
-    const http = require('http');
+/*const http = require('http');
 const fs = require('fs');
 const port = 3001;
 
@@ -99,12 +100,119 @@ const server = http.createServer((req, res) => {
     }
 
     if (req.url.toLowerCase() === '/message' && req.method === 'POST') {
-        let parsedBody = "dummy text"; // temporary fix so it's defined
-        fs.writeFile('message.txt', parsedBody); 
+        let parsedBody = "hello world"; // temporary fix so it's defined
+        fs.writeFile('message.txt', parsedBody, (err) => {
+    if (err) throw err;
+    res.statusCode = 302;
+    res.setHeader('Location', '/');
+    return res.end();
+});
+
             res.statusCode = 302;
             res.setHeader('Location', '/');
             return res.end();
      }   });
+
+server.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}/`);
+});  */
+
+
+//taking input from the user and and printing it on the console on recieving request
+/*const http = require('http');
+const fs = require('fs');
+const port = 3001;
+
+const server = http.createServer((req, res) => {
+    if (req.url === '/') {
+        res.setHeader('Content-Type', 'text/html');
+        res.write('<html>');
+        res.write('<head><title>Welcome</title></head>');
+        res.write('<body>');
+        res.write('<h1>Hello from Node.js!</h1>');
+        res.write('<form action="/message" method="POST">');
+        res.write('<input type="text" name="username" placeholder="Enter your name"><br>');
+        res.write('<input type="text" name="age" placeholder="Enter your age"><br>');
+        res.write('<button type="submit">Send</button>');
+        res.write('</form>');
+        res.write('</body>');
+        res.write('</html>');
+        return res.end();
+    }
+
+    if (req.url.toLowerCase() === '/message' && req.method === 'POST') {
+        const body = [];
+        req.on('data', (chunk) => {
+            body.push(chunk);           
+            console.log(chunk);
+        });         
+        req.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            console.log(parsedBody);
+        });
+      
+    res.statusCode = 302;
+    res.setHeader('Location', '/');
+    return res.end();
+
+     }   });
+
+server.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}/`);
+});*/
+
+
+
+//taking input from the user and and printing it in correct format in the file 
+
+const http = require('http');
+const fs = require('fs');
+const port = 3001;
+
+const server = http.createServer((req, res) => {
+    if (req.url === '/') {
+        res.setHeader('Content-Type', 'text/html');
+        res.write('<html>');
+        res.write('<head><title>Welcome</title></head>');
+        res.write('<body>');
+        res.write('<h1>Hello from Node.js!</h1>');
+        res.write('<form action="/message" method="POST">');
+        res.write('<input type="text" name="username" placeholder="Enter your name"><br>');
+        res.write('<input type="text" name="age" placeholder="Enter your age"><br>');
+        res.write('<button type="submit">Send</button>');
+        res.write('</form>');
+        res.write('</body>');
+        res.write('</html>');
+        return res.end();
+    }
+
+    if (req.url.toLowerCase() === '/message' && req.method === 'POST') {
+        const body = [];
+        req.on('data', (chunk) => {
+            body.push(chunk);           
+            console.log(chunk);
+        });         
+
+        req.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            console.log(parsedBody);
+
+            const jsonobject = {};
+            const params = new URLSearchParams(parsedBody);
+            for (const [key, value] of params) {
+                jsonobject[key] = value;
+            }
+            console.log(jsonobject);
+
+            fs.writeFile('message.txt', JSON.stringify(jsonobject), (err) => {
+                if (err) throw err;
+                res.statusCode = 302;
+                res.setHeader('Location', '/');
+                return res.end();
+            });
+        });
+    }
+});
 
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
