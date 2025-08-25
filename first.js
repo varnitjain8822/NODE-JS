@@ -165,10 +165,7 @@ server.listen(port, () => {
 
 //taking input from the user and and printing it in correct format in the file 
 
-const http = require('http');
 const fs = require('fs');
-const port = 3001;
-
 const createserver = (req, res) => {
     if (req.url === '/') {
         res.setHeader('Content-Type', 'text/html');
