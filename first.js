@@ -169,7 +169,7 @@ const http = require('http');
 const fs = require('fs');
 const port = 3001;
 
-const server = http.createServer((req, res) => {
+const createserver = (req, res) => {
     if (req.url === '/') {
         res.setHeader('Content-Type', 'text/html');
         res.write('<html>');
@@ -212,8 +212,6 @@ const server = http.createServer((req, res) => {
             });
         });
     }
-});
+};
 
-server.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
-});
+module.exports=createserver;
