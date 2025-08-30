@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE students [
+    <!ELEMENT students (student+)>
+    <!ELEMENT student (firstname, lastname, nickname, marks)>
+    <!ATTLIST student rollno CDATA #REQUIRED>
+    <!ELEMENT firstname (#PCDATA)>
+    <!ELEMENT lastname (#PCDATA)>
+    <!ELEMENT nickname (#PCDATA)>
+    <!ELEMENT marks (#PCDATA)>
+]>
+<students>
+    <student rollno="393">
+        <firstname>John</firstname>
+        <lastname>Doe</lastname>
+        <nickname>JD</nickname>
+        <marks>85</marks>
+    </student>
+    <student rollno="394">
+        <firstname>Jane</firstname>
+        <lastname>Smith</lastname>
+        <nickname>JS</nickname>
+        <marks>90</marks>
+    </student>
+
+</students>
