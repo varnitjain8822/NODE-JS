@@ -1,12 +1,11 @@
-const express = require('express');
-const userRouter = express.Router();
+const express = require('express'); 
+const path = require('path');
+const rootDir = require('../utils/pathutil');
 
+const userrouter = express.Router();
 
-userRouter.get("/", (req, res) => {
-  res.send(`
-    <h1>Welcome to homepage</h1>
-    <a href="/form">click to submit the form</a>
-  `);
+userrouter.get('/', (req, res) => {
+  res.sendFile(path.join(rootDir, 'views', 'home.html'));
 });
 
-module.exports = userRouter;
+module.exports = userrouter;

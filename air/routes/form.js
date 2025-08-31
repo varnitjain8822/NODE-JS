@@ -9,9 +9,7 @@ formRouter.get("/form", (req, res) => {
 
 
 formRouter.post("/form", (req, res) => {
-  res.send(`
-    <h1>Form submitted successfully</h1>
-  `);
+  res.sendFile(path.join(rootDir, 'views', 'formsucess.html'));
 });
 
 module.exports = formRouter;
