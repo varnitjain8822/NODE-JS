@@ -7,7 +7,9 @@
   "type": "commonjs",
   "main": "app2.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app2.js",
+    "build-css": "tailwindcss -i ./views/input.css -o ./views/output.css --watch"
   },
   "dependencies": {
     "accepts": "^2.0.0",
@@ -73,11 +75,13 @@
     "side-channel-map": "^1.0.1",
     "side-channel-weakmap": "^1.0.2",
     "statuses": "^2.0.2",
-    "tailwindcss": "^4.1.12",
     "toidentifier": "^1.0.1",
     "type-is": "^2.0.1",
     "unpipe": "^1.0.0",
     "vary": "^1.1.2",
     "wrappy": "^1.0.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
   }
 }
