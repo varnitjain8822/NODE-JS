@@ -8,8 +8,8 @@
   "main": "app2.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app2.js",
-    "build-css": "tailwindcss -i ./views/input.css -o ./views/output.css --watch"
+    "build-css": "npx tailwindcss -i ./styles/input.css -o ./public/output.css --watch",
+    "start": "nodemon app2.js  && npm run build-css"
   },
   "dependencies": {
     "accepts": "^2.0.0",
