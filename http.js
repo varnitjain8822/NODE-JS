@@ -17,12 +17,24 @@ const server = http.createServer((req, res) => {
   } 
   else if (req.url === "/remotehub2.html") {
     filePath = path.join(__dirname, "remotehub2.html");
-    sendFile(filePath, "text/html", res);   // ✅ Fixed
+    sendFile(filePath, "text/html", res);   
   }
   else if (req.url === "/remotehub2.css") {
     filePath = path.join(__dirname, "remotehub2.css");
     sendFile(filePath, "text/css", res);
   }
+
+  else if (req.url === "/courses.html") {
+    filePath = path.join(__dirname, "courses.html");
+    sendFile(filePath, "text/html", res);
+  }
+
+  else if (req.url === "/courses.css") {
+    filePath = path.join(__dirname, "courses.css");
+    sendFile(filePath, "text/css", res);
+  }
+
+
   else {
     res.writeHead(404, { "Content-Type": "text/plain" });
     res.end("404 Not Found");
@@ -42,5 +54,6 @@ function sendFile(filePath, contentType, res) {
 }
 
 server.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(` Server running at http://localhost:${PORT}`);
 });
+
