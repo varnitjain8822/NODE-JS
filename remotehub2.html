@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remote Learning Dashboard</title>
+   <link rel="stylesheet" href="remotehub2.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>📖 Dashboard</h2>
+    <ul>
+      <li><a href="#">🏠 Home</a></li>
+      <li><a href="#">📚 Courses</a></li>
+      <li><a href="#">📝 Assignments</a></li>
+      <li><a href="#">📊 Progress</a></li>
+      <li><a href="#">💬 Messages</a></li>
+      <li><a href="#">🔔 Notifications</a></li>
+      <li><a href="#">⚙ Settings</a></li>
+      <li><a href="#">🚪 Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <h2>Welcome, Student 👩‍🎓</h2>
+      <button>Switch to Teacher</button>
+    </div>
+
+    <!-- Quick Access Cards -->
+    <div class="card-container">
+      <div class="card">
+        <h3>📚 My Courses</h3>
+        <p>Access live & recorded classes.</p>
+      </div>
+      <div class="card">
+        <h3>📝 Assignments</h3>
+        <p>View and submit assignments on time.</p>
+      </div>
+      <div class="card">
+        <h3>📊 Progress</h3>
+        <p>Track your performance & results.</p>
+      </div>
+      <div class="card">
+        <h3>💬 Messages</h3>
+        <p>Chat with teachers and classmates.</p>
+      </div>
+      <div class="card">
+        <h3>🔔 Notifications</h3>
+        <p>Stay updated with announcements.</p>
+      </div>
+      <div class="card">
+        <h3>⚙ Settings</h3>
+        <p>Update profile & preferences.</p>
+      </div>
+    </div>
+
+    <!-- Extra Widgets -->
+    <div class="extras">
+      <div class="widget">
+        <h3>📅 Upcoming Classes</h3>
+        <ul>
+          <li>Maths – 10:00 AM</li>
+          <li>Science – 12:30 PM</li>
+          <li>English – 2:00 PM</li>
+        </ul>
+      </div>
+      <div class="widget">
+        <h3>💡 Daily Tip</h3>
+        <p class="quote">"Consistency is the key to success. Keep learning every day!"</p>
+      </div>
+    </div>
+  </div>
+
+    <!-- Chatbot Button -->
+  <div class="chatbot-toggle" onclick="toggleChat()">
+    💬
+  </div>
+
+  <!-- Chatbot Window -->
+  <div class="chatbot" id="chatbot">
+    <div class="chatbot-header">
+      <h4>AI Classroom Assistant</h4>
+      <button onclick="toggleChat()">✖</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="bot-msg">Hello 👋! I am your AI Assistant. How can I help you?</div>
+    </div>
+    <div class="chatbot-footer">
+      <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="handleKey(event)">
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+
+</body>
+<script src="remotehub2.js"></script>
+</html>
