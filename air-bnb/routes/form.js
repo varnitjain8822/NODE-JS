@@ -2,18 +2,13 @@ const express = require('express');
 const formRouter = express.Router();
 const path = require('path');
 const rootDir = require('../utils/pathutil');
-
-formRouter.get("/form", (req, res) => {
-   res.render('forms', {pagetitle:'room booking'});
-});
+const  {formController, formSuccessController} = require('../controllers/form');
 
 const registeredUsers = [];
 
-formRouter.post("/form", (req, res) => {
-  console.log(req.body);
-  res.render('formsucess', {pagetitle:'form success'});
-  registeredUsers.push({name: req.body.name, room: req.body.room, price: req.body.price});
-});
+formRouter.get('/form', formController);
+formRouter.post("/form", formSuccessController);
+
 
 
 exports.formRouter = formRouter;

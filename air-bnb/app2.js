@@ -6,7 +6,7 @@ app.set('views', 'views');
 const path = require('path'); 
 const rootDir = require('./utils/pathutil');
 
-const userRouter = require('./routes/userrouterr');   
+const userRouter = require('./routes/home');   
 const {formRouter} = require('./routes/form');  
 const port = 3000; 
 
