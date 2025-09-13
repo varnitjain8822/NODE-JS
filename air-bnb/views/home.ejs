@@ -5,7 +5,7 @@
 <body>
   <%- include('PARTIALS/header.ejs') %>
 
-  <h1 class="text-center text-3xl font-bold my-4"> WELCOME TO AIRBNB </h1>
+  <h1 class="text-center text-3xl font-bold my-4">WELCOME TO AIRBNB</h1>
 
   <div class="text-center mb-4">
     <a href="/form" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
@@ -13,24 +13,27 @@
     </a>
   </div>
 
-  <div style="background-color: aqua;"><h2 style="text-align: center ;">Registered Users</h2></div>
+  <div class="bg-cyan-300 text-center py-2">
+    <h2 class="text-xl font-semibold">Registered Users</h2>
+  </div>
+
   <div class="users-grid">
     <% if (Array.isArray(users) && users.length > 0) { %>
-      <% for (let user of users) { %>
-        <div class="user-card">
+      <% users.forEach(user => { %>
+        <div class="user-card border rounded-lg shadow-md overflow-hidden">
           <% if (user.imageUrl) { %>
-            <img src="<%= user.imageUrl %>" alt="Room image">
+            <img src="<%= user.imageUrl %>" alt="Room image" class="w-full h-48 object-cover">
           <% } %>
-          <div style="padding: 16px;">
-            <h3><%= user.name %></h3>
-            <p><strong>Room Type:</strong> <%= user.housename %></p>
+          <div class="p-4">
+            <h3 class="font-bold text-lg"><%= user.name %></h3>
+            <p><strong>House Name:</strong> <%= user.housename %></p>
             <p><strong>Price:</strong> $<%= user.price %></p>
-            <p><strong>Room Type:</strong> <%= user.location %></p>
+            <p><strong>Location:</strong> <%= user.location %></p>
           </div>
         </div>
-      <% } %>
+      <% }) %>
     <% } else { %>
-      <p class="text-center">No users registered yet.</p>
+      <p class="text-center py-4">No users registered yet.</p>
     <% } %>
   </div>
 </body>
