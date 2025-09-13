@@ -1,11 +1,16 @@
-<%- include('PARTIALS/head.ejs', { pagetitle: 'Book Your Room' }) %>
-<link rel="stylesheet" href="/home.css">
-<link rel="stylesheet" href="output.css">
+<!-- will show home page with list of registered users -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../PARTIALS/head.ejs', { pagetitle: 'Book Your Room' }) %>
+  <link rel="stylesheet" href="/home.css">
+  <link rel="stylesheet" href="/output.css">
 </head>
 <body>
-  <%- include('PARTIALS/header.ejs') %>
+  <%- include('../PARTIALS/header.ejs') %>
 
-  <h1 class="text-center text-3xl font-bold my-4">WELCOME TO AIRBNB</h1>
+  <h1 class="text-center text-3xl font-bold my-4">WELCOME TO AIRBNB HOMEPAGE</h1>
 
   <div class="text-center mb-4">
     <a href="/form" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
@@ -16,7 +21,7 @@
   <div class="bg-cyan-300 text-center py-2">
     <h2 class="text-xl font-semibold">Registered Users</h2>
   </div>
-
+ 
   <div class="users-grid">
     <% if (Array.isArray(users) && users.length > 0) { %>
       <% users.forEach(user => { %>
@@ -29,6 +34,7 @@
             <p><strong>House Name:</strong> <%= user.housename %></p>
             <p><strong>Price:</strong> $<%= user.price %></p>
             <p><strong>Location:</strong> <%= user.location %></p>
+            <a href="/details/<%= user.id %>" class="text-blue-600 underline">DETAILS</a>
           </div>
         </div>
       <% }) %>

@@ -13,6 +13,7 @@ module.exports = class Home {
   save() {
     Home.fetchAll((registeredUsers) => {
       registeredUsers.push(this);
+      this.id = Date.now();
       const filePath = path.join(rootDir, 'data', 'users.json');
       fs.writeFile(filePath, JSON.stringify(registeredUsers), (err) => {
         if (err) {
