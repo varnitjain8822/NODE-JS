@@ -35,6 +35,8 @@
             <p><strong>Price:</strong> $<%= user.price %></p>
             <p><strong>Location:</strong> <%= user.location %></p>
             <a href="/details/<%= user.id %>" class="text-blue-600 underline">DETAILS</a>
+            <%- include('../partials/favourite' ,{home:user}) %>
+
           </div>
         </div>
       <% }) %>

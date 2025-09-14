@@ -1,0 +1,28 @@
+<%- include('../PARTIALS/head.ejs') %>
+
+<body>
+  <%- include('../PARTIALS/header.ejs') %>
+  <div class="hello"> 
+    <h1>HELLO FREELY EDIT YOUR HOME HERE</h1>  
+  </div>
+
+  <form action="/host/editing" method="post">
+    <input type="text" name="housename" value="<%= home ? home.housename : '' %>" />
+    <br />
+  
+    <input type="text" value = "<%= home.id %>">   
+
+    <br>
+    <input type="text" name="location" value="<%= home ? home.location : '' %>" placeholder="Room location" />
+    <br />
+
+    <input type="number" name="price" value="<%= home ? home.price : '' %>" placeholder="Booking price" />
+    <br />
+
+    <input type="text" name="imageUrl" value="<%= home ? home.imageUrl : '' %>" />
+    <br />  
+
+    <button type="submit">EDIT</button>
+  </form>
+</body>
+</html>

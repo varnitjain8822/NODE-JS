@@ -32,8 +32,12 @@
             <p><strong>House Name:</strong> <%= user.housename %></p>
             <p><strong>Price:</strong> $<%= user.price %></p>
             <p><strong>Location:</strong> <%= user.location %></p>
-            <button style="background-color: red;">edit</button>
-            <button style= "background-color: green;">delete</button>
+            <a href="/host/edit/<%= user.id %>?editing=true">
+            <button style="background-color: red;">Edit</button>
+            </a>
+            <form action="/host/delete-home/<%= user.id %>" method="post">
+                <button type="submit" class="bg-red-500 p-2">Delete</button>
+              </form>
           </div>
         </div>
       <% }) %>

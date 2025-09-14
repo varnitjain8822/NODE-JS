@@ -1,5 +1,5 @@
 const express = require('express');
-const storeRouter = express.Router(); // single router for all store routes
+const storeRouter = express.Router();
 
 const storeController = require('../controllers/storecontroller');
 
@@ -8,7 +8,11 @@ storeRouter.get('/', storeController.gethomepage);
 storeRouter.get('/homepage', storeController.gethomepage);  
 storeRouter.get('/homelist', storeController.gethomelist);  
 storeRouter.get('/booking', storeController.getbooking);  
-storeRouter.get('/favourite', storeController.getfavourite);
+storeRouter.get('/details/:userid', storeController.getdetails);
+
+// Favourite routes
+storeRouter.post('/favourite', storeController.postAddToFavourite);  // Add to favourites
+storeRouter.get('/favourite', storeController.getfavourite);         // Show favourites page
 
 // Form page
 storeRouter.get('/form', storeController.formController);
