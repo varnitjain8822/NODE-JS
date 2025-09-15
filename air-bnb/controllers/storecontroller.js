@@ -1,7 +1,7 @@
 const Favourite = require('../models/favourites');
 const Home = require('../models/model'); 
 
-// rendering home page
+// Rendering home page
 exports.gethomepage = (req, res) => {
   Home.fetchAll((registeredUsers) => {
     res.render('store/home-page', { 
@@ -12,24 +12,23 @@ exports.gethomepage = (req, res) => {
   }); 
 };
 
-
+// Show details of a single home
 exports.getdetails = (req, res) => {
- const user = req.params.userid;
- Home.findbyid(user, home =>  {
-     if(!home)
-     res.redirect('/homelist')
-     else{
-     res.render('store/home-detail', {
-          home : home , 
-          title: 'Home-page', 
-          currentpage: 'home-page'  
-     });}
- });
+  const userId = req.params.userid;
+  Home.findbyid(userId, (home) => {
+    if (!home) {
+      return res.redirect('/homelist');
+    }
+    res.render('store/home-detail', {
+      home: home, 
+      title: 'Home Details', 
+      currentpage: 'home-detail'  
+    });
+  });
 };
- 
 
-
-exports.postAddToFavourite = (req, res, next) => {
+// Add to favourites
+exports.postAddToFavourite = (req, res) => {
   console.log("POST /favourite route hit");
   console.log("req.body:", req.body);
 
@@ -40,16 +39,24 @@ exports.postAddToFavourite = (req, res, next) => {
       console.error("Error while marking favourite:", error);
       return res.status(500).send("Could not add to favourites");
     }
+    // redirect back to favourites page after adding
+    res.redirect('/favourite');
   });
 };
 
-
-
-
+// Get favourites
 exports.getfavourite = (req, res) => {
   Favourite.getFavourites((favouriteIds) => {
+    console.log("Favourite IDs:", favouriteIds);
+
     Home.fetchAll((allHomes) => {
-      const favHomes = allHomes.filter(home => favouriteIds.includes(home.id.toString()));
+      console.log("All Homes IDs:", allHomes.map(h => h.id));
+
+      const favHomes = allHomes.filter(
+        (home) => home.id && favouriteIds.includes(home.id.toString())
+      );
+
+      console.log("Matched Fav Homes:", favHomes);
 
       res.render('store/favourite', { 
         title: 'My Favourites', 
@@ -61,7 +68,7 @@ exports.getfavourite = (req, res) => {
 };
 
 
-
+// Home list
 exports.gethomelist = (req, res) => {
   Home.fetchAll((registeredUsers) => {
     res.render('store/home-list', { 
@@ -72,28 +79,20 @@ exports.gethomelist = (req, res) => {
   }); 
 };
 
-
-
-
-
+// Bookings
 exports.getbooking = (req, res) => {
-    res.render('store/bookings', { 
-      title: 'my-bookings', 
-      currentpage: 'my-bookings'  
-    });
+  res.render('store/bookings', { 
+    title: 'My Bookings', 
+    currentpage: 'my-bookings'  
+  });
 };
 
-
-
-
-
-
-// rendering form page
+// Rendering form page
 exports.formController = (req, res) => {
-  res.render('store/form', { pagetitle: 'room booking' });
+  res.render('store/form', { pagetitle: 'Room Booking' });
 };
 
-// saving form data
+// Saving form data
 exports.formSuccessController = (req, res) => {
   const hmodel = new Home(
     req.body.housename,
@@ -102,9 +101,5 @@ exports.formSuccessController = (req, res) => {
     req.body.imageUrl
   );
   hmodel.save();
-  res.render('store/formsucess', { pagetitle: 'form success' });
+  res.render('store/formsucess', { pagetitle: 'Form Success' });
 };
-
-
-
-
