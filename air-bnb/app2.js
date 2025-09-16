@@ -22,6 +22,19 @@ const port = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(rootDir, 'public')));
 
+
+const db = require("./utils/databaseutil");
+db.execute('SELECT * FROM house')
+  .then(([rows, fields]) => {
+    console.log(rows);   // actual data
+    console.log(fields); // metadata (columns info)
+  })
+  .catch(error => {
+    console.log("getting error", error);
+  });
+
+
+
 // Use routers
 app.use(storerouter);  
 app.use(hostrouter);
