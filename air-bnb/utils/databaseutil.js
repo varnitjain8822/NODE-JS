@@ -1,13 +1,23 @@
-// Import mysql2
-const mysql = require('mysql2');
+const mongo = require("mongodb");
+const MongoClient = mongo.MongoClient;
+const MONGO_URL =
+  "mongodb+srv://root:root@air-bnb.er8x0ay.mongodb.net/airbnb?retryWrites=true&w=majority&appName=air-bnb";
 
-// Create connection
-const pool = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'airbnb'
-});
+let _db;
+
+const mongoConnect = async (callback) => {
+  MongoClient.connect(MONGO_URL)
+    .then((client) => {
+      console.log("MongoDB connected!");
+      _db = client.db("airbnb"); // save reference
+      callback(client); // pass client back
+    })
+    .catch((err) => {
+      console.log("Error while connecting to Mongo: ", err);
+      throw err;
+    });
+};
 
 
-module.exports = pool.promise();
+
+exports.mongoConnect = mongoConnect;

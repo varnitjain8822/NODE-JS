@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
+const { mongoConnect } = require('./utils/databaseutil'); 
+
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,17 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(rootDir, 'public')));
 
 
-const db = require("./utils/databaseutil");
-db.execute('SELECT * FROM house')
-  .then(([rows, fields]) => {
-    console.log(rows);   // actual data
-    console.log(fields); // metadata (columns info)
-  })
-  .catch(error => {
-    console.log("getting error", error);
-  });
-
-
 
 // Use routers
 app.use(storerouter);  
@@ -45,6 +36,10 @@ app.use((req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+
+mongoConnect(() => {
+  app.listen(port, () => {
+    console.log("MongoDB connected to:");
+    console.log(`Server running at http://localhost:${port}/`);
+  });
 });
