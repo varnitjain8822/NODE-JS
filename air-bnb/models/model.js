@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const rootDir = require('../utils/pathutil');
+const { getDb } = require('../utils/databaseutil');
 
 module.exports = class Home {
   constructor(housename, location, price, imageUrl) {
@@ -12,23 +13,19 @@ module.exports = class Home {
   }
 
  
-  save() {
-    Home.fetchAll((registeredHomes) => {
-      const homeDataPath = path.join(rootDir, 'data', 'users.json');
-
-      if (this.id) { // edit home case
-        registeredHomes = registeredHomes.map(home => 
-          home.id === this.id ? this : home);
-      } else { // add home case
-        this.id = Math.random().toString();
-        registeredHomes.push(this);
-      }
-      
-      fs.writeFile(homeDataPath, JSON.stringify(registeredHomes), (error) => {
-        console.log("File Writing Concluded", error);
-      });
+ save() {
+  const db = getDb();
+  return db.collection("homes")
+    .insertOne(this)
+    .then((result) => {
+      console.log(result);
+      return result; // good practice: return result to use later
+    })
+    .catch((err) => {
+      console.log("Error inserting document:", err);
     });
-  }
+}
+
 
 
   static fetchAll(callback) {

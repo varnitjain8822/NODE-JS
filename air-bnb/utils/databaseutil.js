@@ -5,12 +5,12 @@ const MONGO_URL =
 
 let _db;
 
-const mongoConnect = async (callback) => {
+const mongoConnect = (callback) => {
   MongoClient.connect(MONGO_URL)
     .then((client) => {
       console.log("MongoDB connected!");
       _db = client.db("airbnb"); // save reference
-      callback(client); // pass client back
+      callback(client); // ✅ call the callback
     })
     .catch((err) => {
       console.log("Error while connecting to Mongo: ", err);
@@ -18,6 +18,11 @@ const mongoConnect = async (callback) => {
     });
 };
 
-
-
+const getDb = () =>{
+  if(!_db){
+    throw new Error("databse not connected");
+  }
+    return _db;
+  }
 exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;

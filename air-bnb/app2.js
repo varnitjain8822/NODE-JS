@@ -39,7 +39,6 @@ app.use((req, res) => {
 
 mongoConnect(() => {
   app.listen(port, () => {
-    console.log("MongoDB connected to:");
     console.log(`Server running at http://localhost:${port}/`);
   });
 });
