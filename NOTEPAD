@@ -1,0 +1,335 @@
+//maximum and second maximum in a array 
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{
+int arr[] = {1,2,3,4,5,};
+List<Integer> li = new ArrayList<>();
+li = secondLargestElement(arr); 
+for(int num :li)
+{
+System.out.print(num + " ");
+}
+}
+public static List<Integer> secondLargestElement(int[] nums) {
+int n= nums.length;
+List<Integer> li = new ArrayList<>();
+int max=nums[0];
+int smax=-1;
+for(int i =0 ; i<n ; i++)
+{
+if(nums[i]>max)
+{smax=max;
+max=nums[i];}
+
+else if( nums[i]<max && max>smax)
+smax=nums[i];
+}
+li.add(max);
+li.add(smax);
+return li;
+}
+}
+
+
+
+
+// check if array is sorted or not 
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{
+int arr[] = {12,2,3,4,5,};
+boolean i;
+i=arraysorted(arr);
+System.out.print(i+ " ");
+}
+
+public static boolean arraysorted(int[] nums) {
+int n= nums.length;
+for(int i =0 ;i<n-1 ; i++)
+{
+if(nums[i]>nums[i+1])
+return false;
+}
+return true;
+}
+}
+
+
+
+
+// removing duplicates from sorted array 
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{
+int arr[] = {1,1,2,2,2,5,5};
+removeduplicate(arr);
+}
+
+public static void removeduplicate(int[] nums) {
+int n= nums.length;
+int i =0;
+int j=1;
+while(j<n){
+if(nums[i]!=nums[j])
+{i++;
+nums[i]=nums[j];
+j++;
+}
+
+else{
+j++;
+}
+}
+int k=0;
+while(k<i+1)
+{System.out.println(nums[k]);
+k++;}
+}
+}
+
+
+// left rotate an array by 1 places 
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{
+int arr[] = {1,1,2,2,2,5,5};
+leftrotate(arr);
+int n = arr.length;
+for(int i =0 ; i< n ;i++)
+System.out.println(arr[i]);
+}
+
+public static void leftrotate(int[] nums) {
+int temp = nums[0];
+int n = nums.length;
+for(int i =1; i<n ; i++)
+nums[i-1]=nums[i];
+
+nums[n-1]=temp;
+}
+}
+
+
+
+
+//left rotate an array by 1 places 
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{
+int arr[] = {1,1,2,2,2,5,5};
+rightrotate(arr);
+int n = arr.length;
+for(int i =0 ; i< n ;i++)
+System.out.println(arr[i]);
+}
+
+public static void rightrotate(int[] nums) {
+int n = nums.length;
+int temp = nums[n-1];
+for(int i =n-1; i>=1 ; i--)
+nums[i]=nums[i-1];
+
+nums[0]=temp;
+}
+}
+
+
+
+
+// rotate an array right by one places 
+
+
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{
+int arr[] = {1,1,2,2,2,5,5};
+rightrotate(arr);
+int n = arr.length;
+for(int i =0 ; i< n ;i++)
+System.out.println(arr[i]);
+}
+
+public static void rightrotate(int[] nums) {
+int n = nums.length;
+int temp = nums[n-1];
+for(int i =n-1; i>=1 ; i--)
+nums[i]=nums[i-1];
+
+nums[0]=temp;
+}
+}
+
+
+
+
+// left rotate an array by k places 
+
+
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{ Scanner sc = new Scanner(System.in);
+int arr[] = {1,1,2,2,2,5,5};
+int k = sc.nextInt();
+int n = arr.length;
+k = k%n;
+reverse(arr,0,k-1);
+reverse(arr,k,n-1);
+reverse(arr,0,n-1);
+for(int i=0;i<n;i++)
+{
+System.out.print(arr[i] + " ");
+}
+
+}
+
+public static void reverse(int[] nums , int i , int j ) {
+while(i<=j)
+{
+int temp = nums[i];
+nums[i]=nums[j];
+nums[j]=temp;
+i++;
+j--;
+}
+}
+
+}
+
+
+
+
+
+
+// move zeroes to end   
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{ Scanner sc = new Scanner(System.in);
+int arr[] = {1,0,2,0,2,0,5};
+movezeroes(arr);
+int n = arr.length;
+for(int i=0;i<n;i++)
+{
+System.out.print(arr[i] + " ");
+}
+
+}
+
+public static void movezeroes(int[] nums) {
+int i =0;
+int j=1;
+int n = nums.length;
+while(j<n)
+{
+if(nums[j]!=0)
+{
+i++;
+nums[i]=nums[j];
+j++;
+}
+
+else{
+j++;
+}
+}
+
+for(int k =i+1 ; k<n;k++)
+{
+nums[k]=0;
+}
+}
+
+}
+
+
+
+
+//count maximum no of consecutive zero 
+
+
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{ Scanner sc = new Scanner(System.in);
+int arr[] = {1,1,1,0,0,1,1,1,1,0,1,1,1,};
+int n = cone(arr);
+System.out.print(n);
+}
+
+public static int cone(int[] nums) {
+int count = 0;
+int max= 0 ;
+for (int i = 0 ; i<nums.length;i++){
+if(nums[i]==1){
+count++;
+max=Math.max(max,count);
+}
+else
+count=0;
+}
+return max;
+}
+
+}
+
+
+
+
+//  find one element that did not appear twice in a array 
+
+
+
+import java.util.*;
+class Solution {
+public static void main(String [] args)
+{ Scanner sc = new Scanner(System.in);
+int arr[] = {1,1,0,0,2,2,3};
+int n = dnum(arr);
+System.out.print(n);
+}
+
+public static int dnum(int[] nums) {
+int xor= 0 ;
+for (int i = 0 ; i<nums.length;i++)
+{
+xor = xor ^ nums[i];
+}
+return xor;
+}
+
+
+}
+
+
+
+
+
+
+// longest subarray sum 
+
+
+
+
+
+
+
+
+
+
+
+
